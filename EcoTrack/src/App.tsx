@@ -1,35 +1,61 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import Home from './pages/Home';
+import { emissionFactors } from './data/emissionFactors';
+import type { UserInput, CarbonFootprint } from './types';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [userInput, setUserInput] = useState<UserInput>({
+    dailyTravelDistance: 0,
+    transportMode: 'car',
+    monthlyElectricityUsage: 0,
+    foodHabit: 'vegetarian'
+  });
+
+  const [carbonFootprint, setCarbonFootprint] = useState<CarbonFootprint | null>(null);
+  const [showResults, setShowResults] = useState(false);
+
+  const handleInputChange = (field: keyof UserInput, value: string | number) => {
+    setUserInput(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const calculateCarbonFootprint = (input: UserInput): CarbonFootprint => {
+    // Calculate transport emissions (daily distance * 30 days * emission factor)
+    const transportEmissions = input.dailyTravelDistance * 30 * emissionFactors.transport[input.transportMode];
+    
+    // Calculate electricity emissions
+    const electricityEmissions = input.monthlyElectricityUsage * emissionFactors.electricity;
+    
+    // Calculate food emissions (daily * 30 days)
+    const foodEmissions = emissionFactors.food[input.foodHabit] * 30;
+    
+    const total = transportEmissions + electricityEmissions + foodEmissions;
+    
+    return {
+      transport: transportEmissions,
+      electricity: electricityEmissions,
+      food: foodEmissions,
+      total
+    };
+  };
+
+  const handleSubmit = () => {
+    const footprint = calculateCarbonFootprint(userInput);
+    setCarbonFootprint(footprint);
+    setShowResults(true);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Home 
+      userInput={userInput}
+      carbonFootprint={carbonFootprint}
+      showResults={showResults}
+      onInputChange={handleInputChange}
+      onSubmit={handleSubmit}
+    />
+  );
 }
 
-export default App
+export default App;
