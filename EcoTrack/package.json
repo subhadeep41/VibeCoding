@@ -1,7 +1,9 @@
 {
   "name": "ecotrack",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "EcoTrack - Carbon Footprint Calculator and Environmental Impact Tracker",
+  "author": "EcoTrack Team",
   "type": "module",
   "scripts": {
     "dev": "vite",

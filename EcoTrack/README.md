@@ -1,23 +1,87 @@
-# React + TypeScript + Vite
+# 🌱 EcoTrack - Carbon Footprint Calculator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+EcoTrack is a modern web application that helps users calculate and track their carbon footprint. Built with React, TypeScript, and Vite, it provides an intuitive interface for environmental impact assessment and promotes sustainable living practices.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Carbon Footprint Calculator**: Calculate your environmental impact across various categories
+- **User Authentication**: Secure login and registration system
+- **Modern UI**: Beautiful, responsive interface built with Tailwind CSS
+- **Real-time API**: Backend integration with .NET Web API
+- **Interactive Dashboard**: Comprehensive dashboard for tracking and analytics
+- **Educational Content**: Tips and suggestions for reducing environmental impact
 
-## Expanding the ESLint configuration
+## 🚀 Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Frontend**: React 19, TypeScript, Vite
+- **Styling**: Tailwind CSS
+- **Backend**: .NET 8 Web API
+- **Authentication**: JWT-based authentication
+- **API Documentation**: Swagger/OpenAPI
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Development Setup
+
+### Prerequisites
+- Node.js (v18 or higher)
+- .NET 8 SDK
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd EcoTrack
+```
+
+2. Install frontend dependencies:
+```bash
+npm install
+```
+
+3. Install backend dependencies:
+```bash
+cd backend
+dotnet restore
+```
+
+### Running the Application
+
+1. Start the backend server:
+```bash
+cd backend
+dotnet run
+```
+
+2. Start the frontend development server:
+```bash
+npm run dev
+```
+
+The application will be available at `http://localhost:5173` with the API running on `http://localhost:5000`.
+
+## 📋 Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run lint` - Run ESLint
+- `npm run preview` - Preview production build
+
+## 🌍 Environmental Impact
+
+EcoTrack helps users understand and reduce their environmental impact by:
+- Calculating carbon footprints across transportation, energy, and lifestyle categories
+- Providing personalized recommendations for sustainability
+- Tracking progress over time
+- Educating users about environmental best practices
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is licensed under the MIT License.
 
       // Remove tseslint.configs.recommended and replace with this
       ...tseslint.configs.recommendedTypeChecked,
